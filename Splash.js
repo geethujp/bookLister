@@ -5,24 +5,20 @@ import {
   View
 } from 'react-native';
 export default class extends Component {
-    render() {
-        return (
-        <View style={styles.container}>
-        	<Text style={styles.welcome}>
-        	Geethu Jose
-        	</Text>
-        	<Text style={styles.instructions}>
-			Address
-        	</Text>
-        	<Text style={styles.instructions}>
-        	Pongachira House, {'\n'}
-   			Elookkara,{'\n'}
-   			Muppatahdom P.O,{'\n'}
-   			Aluva - 683110{'\n'}
-        	</Text>
-      	</View>
-        );
-    }
+   constructor() {
+      super()
+      this.state = {
+         list: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
+   }
+   render() {
+      return (
+         <View>
+            <Text>
+               {this.state.list}
+            </Text>
+         </View>
+      );
+   }
 }
 const styles = StyleSheet.create({
   container: {
