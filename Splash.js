@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 
-var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'https://raw.githubusercontent.com/geethujp/bookLister/master/bookList.json';
 
 export default class extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ export default class extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          dataSource: this.state.dataSource.cloneWithRows(responseData),
           loaded: true,
         });
       })
@@ -47,7 +47,7 @@ export default class extends Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
+        renderRow={this.renderBook}
         style={styles.listView}
       />
     );
@@ -57,22 +57,21 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          Loading movies...
+          Loading books...
         </Text>
       </View>
     );
   }
 
-  renderMovie(movie) {
+  renderBook(book) {
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
-          style={styles.thumbnail}
+          source={{uri: book.image}}
+           style={{width: 80, height: 100}}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <Text style={styles.year}>{movie.year}</Text>
+          <Text style={styles.title}>{book.name}</Text>
         </View>
       </View>
     );
@@ -83,20 +82,24 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#eeeeee',
+    margin: 20,
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
   },
   rightContainer: {
     flex: 1,
-  },
+    justifyContent:'center',
+    marginRight:10,
+    marginLeft:10,
+      },
   title: {
-    fontSize: 20,
+    fontSize: 16,
+    color:'#424211',
     marginBottom: 8,
-    textAlign: 'center',
   },
   year: {
-    textAlign: 'center',
   },
   thumbnail: {
     width: 53,
@@ -104,6 +107,5 @@ var styles = StyleSheet.create({
   },
   listView: {
     paddingTop: 20,
-    backgroundColor: '#F5FCFF',
   },
 });
